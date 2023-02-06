@@ -36,6 +36,7 @@ type Client interface {
 	SendAndReceive(body []byte) ([]byte, error)
 	GetEWSAddr() string
 	GetUsername() string
+	SetHeaders(headers map[string]string)
 }
 
 type client struct {
