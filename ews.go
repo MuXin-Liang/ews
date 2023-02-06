@@ -78,8 +78,8 @@ func (c *client) SendAndReceive(body []byte) ([]byte, error) {
 	req.SetBasicAuth(c.Username, c.Password)
 	req.Header.Set("Content-Type", "text/xml")
 	
-	if len(c.Headers) > 0 {
-		for k,v := range c.Headers {
+	if len(c.config.Headers) > 0 {
+		for k,v := range c.config.Headers {
 			req.Header.Set(k,v)
 		}
 	}
