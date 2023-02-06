@@ -29,6 +29,7 @@ type Config struct {
 	Dump    bool
 	NTLM    bool
 	SkipTLS bool
+	Headers map[string]string
 }
 
 type Client interface {
@@ -76,7 +77,13 @@ func (c *client) SendAndReceive(body []byte) ([]byte, error) {
 
 	req.SetBasicAuth(c.Username, c.Password)
 	req.Header.Set("Content-Type", "text/xml")
-
+	
+	if len(c.Headers) > 0 {
+		for k,v := range c.Headers {
+			req.Header.Set(k,v)
+		}
+	}
+	
 	client := &http.Client{
 		CheckRedirect: func(req *http.Request, via []*http.Request) error {
 			return http.ErrUseLastResponse
