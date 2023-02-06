@@ -62,6 +62,10 @@ func NewClient(ewsAddr, username, password string, config *Config) Client {
 	}
 }
 
+func (c *client) SetHeaders(headers map[string]string) {
+  c.config.Headers = headers
+}
+
 func (c *client) SendAndReceive(body []byte) ([]byte, error) {
 
 	bb := []byte(soapStart)
